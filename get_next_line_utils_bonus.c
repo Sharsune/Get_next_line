@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "get_next_line.h"
+#include "get_next_line_bonus.h"
 
 void	gnl_strlcpy(char *dst, const char *src, size_t dstsize)
 {
@@ -38,7 +38,7 @@ char	*gnl_strdup(const char *s1)
 	unsigned char	*new;
 
 	i = 0;
-	new = malloc(sizeof(char) * 2);
+	new = malloc(sizeof (char) * 2);
 	if (!new)
 		return (0);
 	while (s1[i] != '\0')

@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "get_next_line.h"
+#include "get_next_line_bonus.h"
 
 static void	read_file(t_gnl *stash, int fd)
 {
@@ -19,8 +19,8 @@ static void	read_file(t_gnl *stash, int fd)
 
 	read_val = 1;
 	while (!ft_strchr (stash->content, '\n') && read_val)
-	{
-		buffer = malloc(sizeof(char) * (BUFFER_SIZE + 1));
+	{		
+		buffer = malloc (sizeof(char) * (BUFFER_SIZE + 1));
 		if (!buffer)
 			return ;
 		read_val = read(fd, buffer, BUFFER_SIZE);
@@ -37,7 +37,7 @@ static void	read_file(t_gnl *stash, int fd)
 
 static char	*return_line(t_gnl *stash)
 {
-	int		i;
+	size_t	i;
 	char	*return_line;
 
 	i = 0;
@@ -50,7 +50,7 @@ static char	*return_line(t_gnl *stash)
 			break ;
 		}
 	}
-	return_line = malloc(sizeof(char) * (i + 2));
+	return_line = malloc(sizeof (char) * (i + 2));
 	if (!return_line)
 		return (NULL);
 	gnl_strlcpy(return_line, stash->content, (i + 1));
@@ -82,21 +82,21 @@ static void	delete_stash_line(t_gnl *stash)
 
 char	*get_next_line(int fd)
 {
-	static t_gnl	stash;
+	static t_gnl	stash[FILE_MAX];
 	char			*line;
 
-	read_file(&stash, fd);
-	if (!stash.content)
+	if (fd < 0 || fd > FILE_MAX)
+		return (NULL);
+	read_file(&stash[fd], fd);
+	if (!stash[fd].content)
+		return (NULL);
+	if (!*stash[fd].content)
 	{
+		free(stash[fd].content);
+		stash[fd].content = NULL;
 		return (NULL);
 	}
-	if (!*stash.content)
-	{
-		free(stash.content);
-		stash.content = NULL;
-		return (NULL);
-	}
-	line = return_line(&stash);
-	delete_stash_line(&stash);
+	line = return_line(&stash[fd]);
+	delete_stash_line(&stash[fd]);
 	return (line);
 }
