@@ -6,7 +6,7 @@
 /*   By: sharsune <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/21 17:21:28 by sharsune          #+#    #+#             */
-/*   Updated: 2022/11/21 17:58:45 by sharsune         ###   ########.fr       */
+/*   Updated: 2022/12/14 16:50:29 by sharsune         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ static void	read_file(t_gnl *stash, int fd)
 	int		read_val;
 
 	read_val = 1;
-	while (!ft_strchr (stash->content, '\n') && read_val)
+	while (!ft_strchr(stash->content, '\n') && read_val)
 	{		
 		buffer = malloc (sizeof(char) * (BUFFER_SIZE + 1));
 		if (!buffer)
@@ -26,7 +26,7 @@ static void	read_file(t_gnl *stash, int fd)
 		read_val = read(fd, buffer, BUFFER_SIZE);
 		if (read_val < 0)
 		{
-			free (buffer);
+			free(buffer);
 			return ;
 		}
 		buffer[read_val] = '\0';

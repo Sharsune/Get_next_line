@@ -6,7 +6,7 @@
 /*   By: sharsune <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/21 17:22:30 by sharsune          #+#    #+#             */
-/*   Updated: 2022/11/21 17:22:32 by sharsune         ###   ########.fr       */
+/*   Updated: 2022/12/14 16:51:52 by sharsune         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,9 +55,7 @@ char	*ft_strchr(const char *s, int c)
 	if (!s)
 		return (NULL);
 	while (*s != '\0' && *s != (char)c)
-	{
 		s++;
-	}
 	if (*s == (char)c)
 		return ((char *)s);
 	return (0);
@@ -71,9 +69,7 @@ size_t *line_len, int buf_len)
 	char	*newcontent;
 
 	if (!s1)
-	{
 		s1 = gnl_strdup("");
-	}
 	if (!s1 || !s2)
 		return (0);
 	s1_len = *line_len;
@@ -84,8 +80,8 @@ size_t *line_len, int buf_len)
 	{
 		gnl_strlcpy(newcontent, s1, s1_len);
 		gnl_strlcpy(&newcontent[s1_len], s2, s2_len);
-		free ((void *)s1);
-		free ((void *)s2);
+		free((void *)s1);
+		free((void *)s2);
 		newcontent[*line_len] = '\0';
 		return (newcontent);
 	}
